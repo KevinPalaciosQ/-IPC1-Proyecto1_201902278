@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package proyecto1;
-
+//import ParteGrafica.Libros;
+import ParteGrafica.Registro;
+import ParteGrafica.Concatenar;
 /**
  *
  * @author kevin
@@ -15,6 +13,9 @@ public class Proyecto1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Registro r = new Registro();
+       //Libros s = new Libros();
+       //Concatenar s = new Concatenar();
     }
     
 }
