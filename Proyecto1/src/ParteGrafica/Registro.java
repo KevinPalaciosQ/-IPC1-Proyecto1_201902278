@@ -1,37 +1,41 @@
 
 package ParteGrafica;
-//JAVA SWING
+//Librerias
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import Clases.Usuarios;
+//Paquetes 
 
 public class Registro extends JFrame implements ActionListener{
- JLabel titulo, labuser, labcontra;
+    JLabel titulo, labuser, labcontra;
     JButton boton;
-    JTextField nombre;
-    JTextField Contraseña;
+    JTextField usuarios;
+    JTextField contraseñas;
     JButton inicio;
+    static String usu, contra;
     //COLOR
     Color turquesa = new Color( 24, 108, 105);
+    Color ColorJLabel = new Color ( 184, 224, 222 );//Este es el Color que va en el JLabel
     public Registro(){
     //Espacio Usuario
-        nombre = new JTextField();
-        nombre.setBounds(130,100,300,30);
-        nombre.setFont(new Font("Comic Sans MS", Font.ITALIC,20));
-        nombre.setVisible(true);
-        this.add(nombre);
+        usuarios = new JTextField();
+        usuarios.setBounds(130,100,300,30);
+        usuarios.setFont(new Font("Comic Sans MS", Font.ITALIC,20));
+        usuarios.setVisible(true);
+        this.add(usuarios);
     
     //Espacio Contraseña
-        Contraseña = new JTextField();
-        Contraseña.setBounds(130,150,300,30);
-        Contraseña.setFont(new Font("Comic Sans MS", Font.ITALIC,20));
-        Contraseña.setVisible(true);
-        this.add(Contraseña);    
-       
-        //ETIQUETA DE Usuario
+        contraseñas = new JPasswordField();//Para que aparezca como *** la contraseña
+        contraseñas.setBounds(130,150,300,30);//coordenadas
+        contraseñas.setVisible(true);
+        contraseñas.addActionListener(this);
+        this.add(contraseñas);
+        
+        
+        //Etiqueta de Usuario
         titulo = new JLabel("Usuario");
         //POSICION X, POSICION Y, TAMAÑO X, TAMAÑO Y
         titulo.setBounds(30,100,100,20);
@@ -39,12 +43,10 @@ public class Registro extends JFrame implements ActionListener{
         titulo.setFont(new Font("Comic Sans MS", Font.ITALIC,18));
         //COLOR A LA LETRA
         titulo.setForeground(turquesa);
-        //VISIBILIDAD
-        titulo.setVisible(true);
-        //AGREGARLO A LA VENTANA
-        this.add(titulo);
+        titulo.setVisible(true);//mostrar
+        this.add(titulo);//agregar
     
-        //ETIQUETA DE CONTRASEÑA
+        //Etiqueta Prestar Libro
         titulo = new JLabel("Contraseña");
         //POSICION X, POSICION Y, TAMAÑO X, TAMAÑO Y
         titulo.setBounds(30,150,100,20);
@@ -57,12 +59,9 @@ public class Registro extends JFrame implements ActionListener{
         //AGREGARLO A LA VENTANA
         this.add(titulo);    
         
-        //DISEÑO DE LA VENTANA
-        //TITULO DE LA VENTANA
-        this.setTitle("Registro");
-        //QUITAR MARGENES
-        this.setLayout(null);
-        //TAMAÑO DE MI VENTANA
+        //Diseño de la ventana
+        this.setTitle("Registro");//Titulo
+        this.setLayout(null);//Sin margenes
         //POSICION X, POSICION Y, TAMAÑO X, TAMAÑO Y
         this.setBounds(500, 150, 480, 375);
         //QUITAR EL CAMBIO DE TAMAÑO
@@ -71,9 +70,10 @@ public class Registro extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //HACER VISIBLE LA VENTANA
         this.setVisible(true);
+        this.setBackground(ColorJLabel);
+        this.getContentPane().setBackground(ColorJLabel);
         
-        
-    //BOTON DE INICIO DE SESIÓN
+    //Boton Iniciar Sesión
         inicio = new JButton("Iniciar Sesión");
         inicio.setFont(new Font("ARIAL BLACK", Font.BOLD,14));
         inicio.setBounds(280,190,150,30);
@@ -82,11 +82,10 @@ public class Registro extends JFrame implements ActionListener{
         this.add(inicio);  
         
        
-     //BOTON Iniciar  CARGA MASIVA
+     ////Boton Carga Masiva
      JButton carga= new JButton("Carga Masiva");
         carga.setBounds(330, 300, 120, 25);
         carga .setFont(new Font("ARIAL BLACK", Font.BOLD,10));
-        //carga.setBackground(turquesa);
         carga .setVisible(true);
         carga .addActionListener(this);
         this.add(carga);    
@@ -95,11 +94,16 @@ public class Registro extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String Name = nombre.getText();
+        String Name = usuarios.getText();
         if (e.getSource()==boton) {
             Usuarios nuevo = new Usuarios(Name);
             titulo.setText(nuevo.getNombre());
+            
         }
     }
-}    
+
+
+    }
+    
+   
 
