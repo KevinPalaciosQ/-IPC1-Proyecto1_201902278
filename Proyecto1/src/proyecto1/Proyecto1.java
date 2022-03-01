@@ -13,9 +13,9 @@ public class Proyecto1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Registro r = new Registro();
+       Registro r = new Registro();
        //Libros s = new Libros();
-       //Concatenar s = new Concatenar();
+      //Concatenar s = new Concatenar();
     }
     
 }

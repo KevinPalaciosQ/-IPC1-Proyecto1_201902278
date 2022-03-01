@@ -5,7 +5,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
+import javax.swing.table.DefaultTableCellRenderer;
+//import Proyecto1.proyecto1;
 /**
  *
  * @author kevin
@@ -19,7 +20,8 @@ public class Libros extends JPanel implements ActionListener{
     JTextField Autor;
     JTextField Copias;
     JTextField Tipo;
-    
+    static JTable tablac;
+    static Object[][] datos;
     private JComboBox<String> ComboBox;
     public Libros(){
         JLabel titulo;
@@ -127,7 +129,29 @@ public class Libros extends JPanel implements ActionListener{
         this.add(Libross);
         
         this.setBackground(ColorJLabel);//Relleno 
-        this.setLayout(null);    
+        this.setLayout(null);   
+        /*
+     //TABLA
+        String [] encabezado = {"Código","Nombre","NIT","Correo","Género"};
+        datos = proyecto1.convertirDClientes();
+        tablac = new JTable(datos,encabezado);
+        JScrollPane sp= new JScrollPane(tablac);
+        sp.setBounds(20, 10, 800, 600);
+        //CENTRAR LOS DATOS DE LA TABLA
+        DefaultTableCellRenderer renderc = new DefaultTableCellRenderer();
+        renderc.setHorizontalAlignment(SwingConstants.CENTER);
+        tablac.getColumnModel().getColumn(0).setCellRenderer(renderc);
+        tablac.getColumnModel().getColumn(1).setCellRenderer(renderc);
+        tablac.getColumnModel().getColumn(2).setCellRenderer(renderc);
+        tablac.getColumnModel().getColumn(3).setCellRenderer(renderc);
+        tablac.getColumnModel().getColumn(4).setCellRenderer(renderc);
+        tablac.getTableHeader().setFont(new Font("Century Gothic", Font.PLAIN,15));
+        tablac.getTableHeader().setBackground(azul);
+        tablac.getTableHeader().setForeground(Color.WHITE);
+        tablac.setEnabled(false);
+        tablac.setFont(new Font("Century Gothic", Font.PLAIN,12));
+        this.add(sp);    
+        */
     }
 
     @Override

@@ -7,19 +7,37 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 import Clases.Usuarios;
+import java.awt.Image;
+
+
+
+
 //Paquetes 
 
 public class Registro extends JFrame implements ActionListener{
-    JLabel titulo, labuser, labcontra;
+    static JLabel titulo, labuser, labcontra,img,imagen;
     JButton boton;
     JTextField usuarios;
     JTextField contraseñas;
     JButton inicio;
+
     static String usu, contra;
+    
+       
     //COLOR
     Color turquesa = new Color( 24, 108, 105);
     Color ColorJLabel = new Color ( 184, 224, 222 );//Este es el Color que va en el JLabel
     public Registro(){
+    //ICONO DE LA APLICACION
+    setIconImage(new ImageIcon(getClass().getResource("biblioteca.png")).getImage());
+    //Etiqueta de boton
+        imagen = new JLabel();      
+        //POSICION X, POSICION Y, TAMAÑO X, TAMAÑO Y
+        imagen.setBounds(0,10, 400, 120);
+        imagen.setIcon(setIcono("src\\ParteGrafica\\biblioteca.png",imagen));
+        imagen.setVisible(true);//mostrar
+        this.add(imagen);//agregar
+        
     //Espacio Usuario
         usuarios = new JTextField();
         usuarios.setBounds(130,100,300,30);
@@ -102,7 +120,14 @@ public class Registro extends JFrame implements ActionListener{
         }
     }
 
-
+private Icon setIcono(String path, JLabel boton)
+    {
+        ImageIcon icon=new ImageIcon(path);
+        int ancho=boton.getWidth();
+        int alto=boton.getHeight();
+        ImageIcon icono=new ImageIcon(icon.getImage().getScaledInstance(ancho, alto, Image.SCALE_DEFAULT));
+        return icono;
+    }
     }
     
    
