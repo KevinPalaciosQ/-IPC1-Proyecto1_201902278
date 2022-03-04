@@ -1,25 +1,22 @@
 package ParteGrafica;
 
+import static ParteGrafica.Libros.tabla;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
-/**
- *
- * @author kevin
- */
 public class Prestamos extends JPanel implements ActionListener{
     
     JPanel Prestamo;
     JButton registrarlibro ;
-    JButton  cargamasiva;
+    JButton  cargamasiva2;
     JTextField llenarusuario;
     JTextField Libro;  
     JTextField FechadeEntrega;
@@ -30,15 +27,8 @@ public class Prestamos extends JPanel implements ActionListener{
         JLabel titulo; 
         Color ColorJLabel = new Color ( 184, 224, 222 );//Este es el Color que va en el JLabel
         Color oscuro = new Color( 22, 28, 31  );
-        /*
-        Image imag = new ImageIcon("LogoIngUsac.png").getImage();
-        ImageIcon imge = new ImageIcon(imag.getScaledInstance(65, 65, Image.SCALE_SMOOTH));
-        img = new JLabel(imge);
-        img.setLayout(null);
-        img.setBounds(3940,400, 200, 90);
-        img.setVisible(true);
-        this.add(img);       
-*/
+      
+    
     //Espacio Para llenar usuario 
         llenarusuario = new JTextField();
         llenarusuario.setBounds(150,40,100,25);//Posición x, Posición y, Ancho, Largo
@@ -93,29 +83,30 @@ public class Prestamos extends JPanel implements ActionListener{
         registrarlibro.addActionListener(this);
         this.add(registrarlibro);      
     
-        //Boton Prestar Libro
-        cargamasiva = new JButton("Carga Masiva");
-        cargamasiva.setFont(new Font("ARIAL BLACK", Font.BOLD,14));
-        cargamasiva.setBounds(1120,580,155,30);
-        cargamasiva.setVisible(true);
-        cargamasiva.addActionListener(this);
-        this.add(cargamasiva);  
-     
-        
-    Prestamo = new JPanel();
+        //Boton Para segunda carga masiva 
+        cargamasiva2 = new JButton("Carga Masiva");
+        cargamasiva2.setFont(new Font("ARIAL BLACK", Font.BOLD,14));
+        cargamasiva2.setBounds(1120,580,155,30);
+        cargamasiva2.setVisible(true);
+        cargamasiva2.addActionListener(this);
+        this.add(cargamasiva2);  
+        //diseño de la pestaña
+        Prestamo = new JPanel();
         Prestamo.setBounds(400,220,350,300);
-        Prestamo.setBackground(ColorJLabel);
         this.add(Prestamo);
         this.setBackground(ColorJLabel);
-        this.setLayout(null);    
+        this.setLayout(null);         
+         //Aquí empieza la tabla 
+        String[] e = {"Nombre Usuario","Libro","Fecha Entrega","Status"}; 
+        Object[][]datos ={{"Kevin Palacios","El alquimista","20/01/21","Disponible"}};
+        tabla =new JTable(datos,e);
+        JScrollPane diseño = new  JScrollPane(tabla);
+        diseño.setBounds(270,10,600,600);
+        this.add(diseño);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-  
-
 }
 

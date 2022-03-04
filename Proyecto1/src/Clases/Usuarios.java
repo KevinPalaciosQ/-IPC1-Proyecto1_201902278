@@ -1,32 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Clases;
-
-/**
- *
- * @author kevin
- */
 public class Usuarios {
     private String nombre;
-
-    public Usuarios(String nombre) {
+    private int contrasena;
+    public Usuarios(String nombre, int contrasena) {
         this.nombre = nombre;
+        this.contrasena = contrasena;
     }
-
-    /**
-     * @return the nombre
-     */
     public String getNombre() {
         return nombre;
     }
-
-    /**
-     * @param nombre the nombre to set
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+     public int getContrasena() {
+        return contrasena;
+    }
+    public void setContrasena(int contrasena) {
+        this.contrasena = contrasena;
+    }
 }

@@ -1,4 +1,5 @@
 package ParteGrafica;
+import static ParteGrafica.Libros.tabla;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -7,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 /**
  *
  * @author kevin
@@ -46,10 +49,18 @@ public class Reportes extends JPanel implements ActionListener{
         
         Libross = new JPanel();
         Libross.setBounds(400,220,350,300);
-        Libross.setBackground(ColorJLabel);
+       
         this.add(Libross);
         this.setBackground(ColorJLabel);
-        this.setLayout(null);    
+        this.setLayout(null);  
+        
+        //Aquí empieza la tabla 
+        String[] e = {"Fecha Generación","Usuario","Tipo de Reporte"}; 
+        Object[][]datos ={{"20/02/22","Administrador1","Reporte1"}};
+        tabla =new JTable(datos,e);
+        JScrollPane diseño = new  JScrollPane(tabla);
+        diseño.setBounds(380,10,600,600);
+        this.add(diseño);
     }
 
     @Override
