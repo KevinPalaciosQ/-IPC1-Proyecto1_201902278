@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Clases;
 
 /**
@@ -9,5 +5,36 @@ package Clases;
  * @author kevin
  */
 public class ObjetoUsuarios {
-//aqui va el json
+
+    private String Título;
+    private String Autor;
+
+    /**
+     * @return the Título
+     */
+    public String getTítulo() {
+        return Título;
+    }
+
+    /**
+     * @param Título the Título to set
+     */
+    public void setTítulo(String Título) {
+        this.Título = Título;
+    }
+
+    /**
+     * @return the Autor
+     */
+    public String getAutor() {
+        return Autor;
+    }
+
+    /**
+     * @param Autor the Autor to set
+     */
+    public void setAutor(String Autor) {
+        this.Autor = Autor;
+    }
+
 }

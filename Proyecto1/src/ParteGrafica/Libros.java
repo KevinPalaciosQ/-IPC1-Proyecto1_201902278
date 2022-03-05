@@ -8,10 +8,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import javax.swing.*;
+import proyecto1.*;
+import Clases.ObjetoLibros;
 public class Libros extends JPanel implements ActionListener{
     JPanel Libross;
-    JButton registrarlibro;
-    JButton  cargamasiva;
+    JButton registrarlibro,cargamasiva;
     JTextField idLibro;
     JTextField Libro;  
     JTextField Autor;
@@ -32,7 +33,7 @@ public class Libros extends JPanel implements ActionListener{
     //Espacio Para llenar id Libro 
         idLibro = new JTextField();
         idLibro.setBounds(105,40,100,25);//Posición x, Posición y, Ancho, Largo
-        idLibro.setFont(new Font("Comic Sans MS", Font.ITALIC,14));//Tipo de Letra
+        idLibro.setFont(new Font("Comic Sans MS", Font.ITALIC,16));//Tipo de Letra
         idLibro.setVisible(true);//mostrar espacio
         this.add(idLibro);//añadir a la ventana    
     //Etiqueta ID libro
@@ -45,7 +46,7 @@ public class Libros extends JPanel implements ActionListener{
     //Espacio Para llenar Libro 
         Libro = new JTextField();
         Libro.setBounds(105,70,100,25);//Posición x, Posición y, Ancho, Largo
-        Libro.setFont(new Font("Comic Sans MS", Font.ITALIC,14));//Tipo de Letra
+        Libro.setFont(new Font("Comic Sans MS", Font.ITALIC,16));//Tipo de Letra
         Libro.setVisible(true);//mostrar espacio
         this.add(Libro);//añadir a la ventana         
          //Etiqueta Libro
@@ -58,7 +59,7 @@ public class Libros extends JPanel implements ActionListener{
         //Espacio para autor
         Autor = new JTextField();
         Autor.setBounds(105,100,100,25);//Posición x, Posición y, Ancho, Largo
-        Autor.setFont(new Font("Comic Sans MS", Font.ITALIC,20));//Tipo de Letra
+        Autor.setFont(new Font("Comic Sans MS", Font.ITALIC,16));//Tipo de Letra
         Autor.setVisible(true);//mostrar espacio
         this.add(Autor);//añadir a la ventana      
         //Etiqueta Autor
@@ -71,7 +72,7 @@ public class Libros extends JPanel implements ActionListener{
         //Espacio Para llenar Copias
         Copias = new JTextField();
         Copias.setBounds(105,130,100,25);//Posición x, Posición y, Ancho, Largo
-        Copias.setFont(new Font("Comic Sans MS", Font.ITALIC,20));//Tipo de Letra
+        Copias.setFont(new Font("Comic Sans MS", Font.ITALIC,16));//Tipo de Letra
         Copias.setVisible(true);//mostrar espacio
         this.add(Copias);//añadir a la ventana       
         //Etiqueta Copias
@@ -101,6 +102,7 @@ public class Libros extends JPanel implements ActionListener{
         cargamasiva.setBounds(1120,580,155,30);
         cargamasiva.setVisible(true);
         cargamasiva.addActionListener(this);
+        this.setLayout(null);
         this.add(cargamasiva);    
         setLayout(null);
         //Comienzo combobox
@@ -111,34 +113,58 @@ public class Libros extends JPanel implements ActionListener{
         ComboBox.addItem("Libros");
         ComboBox.addItem("Revistas");
         ComboBox.addItem("Electronicos");
-        ComboBox.addActionListener(this);   
+        ComboBox.addActionListener(this);
+        
         //Aquí empieza la tabla 
         String[] e = {"Id Libro","Nombre Libro","Autor","Tipo","Copias","Disponible","Ocupados"}; 
-        Object[][]datos ={{"0","Nombre Libro ","Julio Cortazar","Novela","100","10","20"}};
-        tabla =new JTable(datos,e);
+        //Object[][]datos ={{"0","Nombre Libro ","Julio Cortazar","Novela","100","10","20"}}; aca va la tabla
+        data = Proyecto1.mi();        
+        tabla =new JTable(data,e);
+        //tabla =new JTable(datos,e);//copia por si genera error
         JScrollPane diseño = new  JScrollPane(tabla);
         diseño.setBounds(250,10,600,600);
+        this.setLayout(null);
         this.add(diseño);
         //diseño de ventana 
         this.setBackground(ColorJLabel);//Relleno 
-        this.setLayout(null);   
+        this.setLayout(null); //evita que sea modificado  
          }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource()==cargamasiva) {
             System.out.println("Accediste a carga masiva"); 
-            leerArchivos();
+            LecturaJson();
             System.out.println(contenido);
+            //acá se empieza a modificar
+        }else if (ae.getSource()==registrarlibro){//para cargar el registro    
+        int Id = Integer.parseInt(idLibro.getText());//convertir String a Int
+        String NombreLibro = Libro.getText();
+        String autor = Autor.getText(); 
+        int copias = Integer.parseInt(Copias.getText());//revisar
+        int x=0;
+        if (ComboBox.getSelectedItem()=="Libros") {
+            x=1;
+                    
+            }else if(ComboBox.getSelectedItem()=="Revistas") {
+            x=2;
+            }else if(ComboBox.getSelectedItem()=="Electronicos") {
+            x=3;
+            }
+        ObjetoLibros ob = new ObjetoLibros(Id,NombreLibro,autor,x,copias,0,copias);
+        Proyecto1.crear1(ob);
+        idLibro.setText("");
+        Libro.setText("");
+        Autor.setText("");
+        Copias.setText("");
             // A partir de acá da error 
            // JsonParser parser = new JsonParser();
             //JsonArray arreglo = parser.parse(contenido).getAsJsonArray();//arreglo json
            // System.out.println("Cantidad de Objetos: " + arreglo.size());//arreglo almacenado
         }
-       // throw new UnsupportedOperationException("Not supported yet."); //
     }
 
-    public void leerArchivos(){
+    public void LecturaJson(){
         try{
             JFileChooser fc = new JFileChooser();
             int op = fc.showOpenDialog(this);

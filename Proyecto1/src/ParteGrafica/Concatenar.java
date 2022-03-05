@@ -3,21 +3,31 @@ package ParteGrafica;
 
 import javax.swing.JFrame;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-
-public class Concatenar extends JFrame {
-private JPanel Panel;    
+public class Concatenar extends JFrame implements ActionListener{
+private JPanel Panel;  
+JButton  Actualizar;
  public Concatenar(){
     Color fondo = new Color ( 167, 209, 207 );// este es oscuro
         //Parte del Borde
         
+        //Boton Actualizar
+        Actualizar = new JButton("Actualizar");
+        Actualizar.setFont(new Font("ARIAL BLACK", Font.BOLD,14));
+        Actualizar.setBounds(1000,580,155,30);
+        Actualizar.setVisible(true);
+        Actualizar.addActionListener(this);
+        this.add(Actualizar);   
+        //acá se crea la pestaña
         Panel = new JPanel();
         Panel.setBorder(new EmptyBorder(10,10,10,800));
         setContentPane(Panel);
         Panel.setLayout(null);
-
+        //this.add(Panel);
         //Pestañas
         JTabbedPane pp = new JTabbedPane(JTabbedPane.TOP);
         pp.setBounds(10,11,1290,650);
@@ -42,6 +52,14 @@ private JPanel Panel;
         Graficas graf = new Graficas();
         pp.addTab("Gráficas", null, graf,null);
         
+        //Boton Actualizar
+        Actualizar = new JButton("Actualizar");
+        Actualizar.setFont(new Font("ARIAL BLACK", Font.BOLD,14));
+        Actualizar.setBounds(600,5,155,30);
+        Actualizar.setVisible(true);
+        Actualizar.addActionListener(this);
+        this.add(Actualizar); 
+        //Diseño de la ventana principal
         this.setTitle("Administrador | Biblioteca Usac");
         this.setBounds(20,20,1320,700);
         this.getContentPane().setBackground(fondo);
@@ -54,4 +72,12 @@ private JPanel Panel;
 
         
 }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==Actualizar) {
+            Concatenar c = new Concatenar();
+            this.dispose();
+        }
+    }
 }

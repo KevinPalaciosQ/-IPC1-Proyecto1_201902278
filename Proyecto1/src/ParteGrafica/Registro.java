@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import Clases.Usuarios;
 import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
