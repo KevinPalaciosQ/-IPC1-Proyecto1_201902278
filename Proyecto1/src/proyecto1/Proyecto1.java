@@ -85,9 +85,14 @@ public class Proyecto1 {
         }
     }
     public static Object[][] Prestamista(){
-        Object[][] Prestamos = new Object[contadorprestamo][4];
+        Object[][] Prestamos = new Object[contadorprestamo][3];
         for (int i = 0; i < contadorprestamo; i++) {
-            
+            if (presta[i]!=null) {
+                Prestamos[i][0]=presta[i].getIdLibros();
+                Prestamos[i][1]=presta[i].getIdEstudiante();
+                Prestamos[i][2]=presta[i].getFechaEntrega();
+                
+            }
         }
         return Prestamos;
     }

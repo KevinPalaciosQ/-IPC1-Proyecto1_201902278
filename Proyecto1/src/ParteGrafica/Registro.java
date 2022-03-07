@@ -23,8 +23,10 @@ public class Registro extends JFrame implements ActionListener {
     JButton carga;
     JButton boton2;
     JTextField usuarios;
-    JTextField contraseñas;
+    JPasswordField contraseñas;
     JButton inicio;
+    static String usuarioss;
+    static String contraseñass;
 // ATRIBUTOS
     String contenido = "";
     File archivo;
@@ -58,7 +60,7 @@ public class Registro extends JFrame implements ActionListener {
         contraseñas = new JPasswordField();//Para que aparezca como *** la contraseña
         contraseñas.setBounds(295, 160, 300, 30);//coordenadas
         contraseñas.setVisible(true);
-        contraseñas.addActionListener(this);
+        //contraseñas.addActionListener(this);
         this.add(contraseñas);
 
         //Etiqueta de Usuario
@@ -93,7 +95,7 @@ public class Registro extends JFrame implements ActionListener {
         carga.addActionListener(this);
         this.add(carga);
 
-        ////Boton Carga Masiva
+        ////Boton Acceder tabla usuarios
         boton2 = new JButton("Acceder Usuarios");
         boton2.setBounds(465, 490, 138, 25);
         boton2.setFont(new Font("ARIAL BLACK", Font.BOLD, 10));
@@ -113,42 +115,6 @@ public class Registro extends JFrame implements ActionListener {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        /*
-        String Name = usuarios.getText();
-        if (e.getSource() == inicio) {
-            Concatenar a = new Concatenar();
-            JOptionPane.showMessageDialog(this, "Bienvenido");
-            System.out.println("Bienvenido");
-            logeo();
-            this.dispose();//
-        }
-         */
-        if (ae.getSource() == carga) {
-            // TODO LO QUE ESTE AQUI, HARA EL BOTON1
-            System.out.println("Presionaste al Boton 1.");
-            leerArchivos();
-            
-            Proyecto1.LeerUsuarios();
-        } else if (ae.getSource() == boton2) {
-
-            Tabla nueva = new Tabla();
-
-            this.dispose();
-        }
-         
-        //String Name = usuarios.getText();
-        else if (ae.getSource() == inicio) {
-            Concatenar a = new Concatenar();
-            JOptionPane.showMessageDialog(this, "Bienvenido");
-            System.out.println("Bienvenido");
-            logeo();
-            this.dispose();//
-        }
-         
-    }
-
     private Icon setIcono(String path, JLabel boton) {
         ImageIcon icon = new ImageIcon(path);
         int ancho = boton.getWidth();
@@ -157,25 +123,34 @@ public class Registro extends JFrame implements ActionListener {
         return icono;
     }
 
-    public void logeo() {
-        String usuarioss = usuarios.getText();
-        String contraseñass = contraseñas.getText();
-        if (usuarios.equals("Admin")) {
-            if (contraseñas.equals("admin")) {
-                JOptionPane.showMessageDialog(this, "Bienvenido Admin");
-                this.usuarios.setText("");
-                this.contraseñas.setText("");
-                this.dispose();
-                Concatenar A = new Concatenar();
-            } else {
-                JOptionPane.showMessageDialog(this, "contraseña incorrecta :c ");
+    public void iniciarsesion() {
+        usuarioss = usuarios.getText();
+        contraseñass = contraseñas.getText();
+        if (usuarioss.equals("user") || contraseñass.equals("123456")) {
+            if (usuarioss.equals("user")) {
+                if (contraseñass.equals("123456")) {
+                    JOptionPane.showMessageDialog(this, " Bienvenido Admin");
+                    this.usuarios.setText("");
+                    this.contraseñas.setText("");
+                    this.setVisible(false);
+                    Concatenar a = new Concatenar();
+                }
+                else{
+                    JOptionPane.showMessageDialog(this,"Contraseña incorrecta");
+                }
+                
+                
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "código incorrecto :c ");
+            else{
+                JOptionPane.showMessageDialog(this,"Usuario incorrecto");
+                
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(this,"Usuario y contraseña incorrectos");
         }
-
     }
-    // EL SIEMPRE CONFIABLE LEER ARCHIVOS
+
 
     public void leerArchivos() {
 
@@ -242,4 +217,28 @@ public class Registro extends JFrame implements ActionListener {
             }
         }
     }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == inicio) {
+            iniciarsesion();
+        }
+       
+        if (ae.getSource() == carga) {
+            // TODO LO QUE ESTE AQUI, HARA EL BOTON1
+            System.out.println("Presionaste al Boton 1.");
+            leerArchivos();
+
+            Proyecto1.LeerUsuarios();
+        } else if (ae.getSource() == boton2) {
+
+            Tabla nueva = new Tabla();
+
+            this.dispose();
+        }
+
+       
+    }
+
 }
+

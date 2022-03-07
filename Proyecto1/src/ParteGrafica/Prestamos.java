@@ -5,13 +5,17 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-
+  
 public class Prestamos extends JPanel implements ActionListener{
     
     JPanel Prestamo;
@@ -21,7 +25,12 @@ public class Prestamos extends JPanel implements ActionListener{
     JTextField Libro;  
     JTextField FechadeEntrega;
     JLabel img;
-  
+  //atributos 
+    String contenido = "";
+    File archivo;
+    FileReader fr;
+    BufferedReader br;
+    static Object[][] data;
  //   private JComboBox<String> combo1;
     public Prestamos(){
         JLabel titulo; 
@@ -96,7 +105,8 @@ public class Prestamos extends JPanel implements ActionListener{
         this.add(Prestamo);
         this.setBackground(ColorJLabel);
         this.setLayout(null);         
-         //Aquí empieza la tabla 
+         //AQUÍ EMPIEZA LA TABLA
+         
         String[] e = {"Nombre Usuario","Libro","Fecha Entrega","Status"}; 
         Object[][]datos ={{"Kevin Palacios","El alquimista","20/01/21","Disponible"}};
         tabla =new JTable(datos,e);
@@ -107,6 +117,33 @@ public class Prestamos extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+        public void LecturaJson(){
+        try{
+            JFileChooser fc = new JFileChooser();
+            int op = fc.showOpenDialog(this);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                archivo = fc.getSelectedFile();
+            }
+            // Se hace la lectura
+            fr = new FileReader(archivo);//obtener el texto
+            br = new BufferedReader(fr);//lee el texto
+            String linea;//lee de línea en línea
+            while ((linea = br.readLine()) != null) {
+                
+                contenido += linea;//se agrega texto
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
     }
 }
 
