@@ -1,6 +1,10 @@
 package ParteGrafica;
 //Librerias
 
+import Clases.Usuarios;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -10,21 +14,23 @@ import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-
+import proyecto1.*;
 //Paquetes 
+
 public class Registro extends JFrame implements ActionListener {
 
     static JLabel titulo, labuser, labcontra, img, imagen;
-    JButton boton;
+    JButton carga;
+    JButton boton2;
     JTextField usuarios;
     JTextField contraseñas;
     JButton inicio;
-
+// ATRIBUTOS
+    String contenido = "";
+    File archivo;
+    FileReader fr;
+    BufferedReader br;
     static String usu, contra;
-    //atributos 
-    static File documento;
-    static FileReader lector;
-    static BufferedReader Blector;
 
     //COLOR
     Color turquesa = new Color(24, 108, 105);
@@ -71,8 +77,6 @@ public class Registro extends JFrame implements ActionListener {
         titulo.setVisible(true);//mostrar
         this.add(titulo);//agregar
 
-        
-
         //Boton Iniciar Sesión
         inicio = new JButton("Iniciar Sesión");
         inicio.setFont(new Font("ARIAL BLACK", Font.BOLD, 14));
@@ -82,12 +86,21 @@ public class Registro extends JFrame implements ActionListener {
         this.add(inicio);
 
         ////Boton Carga Masiva
-        JButton carga = new JButton("Carga Masiva");
+        carga = new JButton("Carga Masiva");
         carga.setBounds(475, 530, 120, 25);
         carga.setFont(new Font("ARIAL BLACK", Font.BOLD, 10));
         carga.setVisible(true);
         carga.addActionListener(this);
         this.add(carga);
+
+        ////Boton Carga Masiva
+        boton2 = new JButton("Acceder Usuarios");
+        boton2.setBounds(465, 490, 138, 25);
+        boton2.setFont(new Font("ARIAL BLACK", Font.BOLD, 10));
+        boton2.setVisible(true);
+        boton2.addActionListener(this);
+        this.add(boton2);
+
         //Diseño de la ventana
         this.setTitle("Registro");//Titulo
         this.setLayout(null);//Sin margenes
@@ -101,7 +114,8 @@ public class Registro extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent ae) {
+        /*
         String Name = usuarios.getText();
         if (e.getSource() == inicio) {
             Concatenar a = new Concatenar();
@@ -110,6 +124,29 @@ public class Registro extends JFrame implements ActionListener {
             logeo();
             this.dispose();//
         }
+         */
+        if (ae.getSource() == carga) {
+            // TODO LO QUE ESTE AQUI, HARA EL BOTON1
+            System.out.println("Presionaste al Boton 1.");
+            leerArchivos();
+            
+            Proyecto1.LeerUsuarios();
+        } else if (ae.getSource() == boton2) {
+
+            Tabla nueva = new Tabla();
+
+            this.dispose();
+        }
+         
+        //String Name = usuarios.getText();
+        else if (ae.getSource() == inicio) {
+            Concatenar a = new Concatenar();
+            JOptionPane.showMessageDialog(this, "Bienvenido");
+            System.out.println("Bienvenido");
+            logeo();
+            this.dispose();//
+        }
+         
     }
 
     private Icon setIcono(String path, JLabel boton) {
@@ -137,6 +174,72 @@ public class Registro extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "código incorrecto :c ");
         }
 
-        //JOptionPane.showMessageDialog(this, "código y contraseña incorrectos :c ");
+    }
+    // EL SIEMPRE CONFIABLE LEER ARCHIVOS
+
+    public void leerArchivos() {
+
+        try {
+
+            JFileChooser fc = new JFileChooser();
+            int op = fc.showOpenDialog(this);
+            if (op == JFileChooser.APPROVE_OPTION) {
+                //System.out.println(fc.getSelectedFile());
+                archivo = fc.getSelectedFile();
+            }
+
+            // HACEMOS LA LECTURA DEL ARCHIVO COMO TAL
+            fr = new FileReader(archivo);
+            br = new BufferedReader(fr);
+            String linea;
+            // LEER LINEA POR LINEA
+            while ((linea = br.readLine()) != null) {
+                // Solo agregamos el contenido a un String
+                contenido += linea;
+            }
+            System.out.println(contenido);
+            // JsonParser parser -> Todos los metodos necesarios para interpretar un JSON.
+            JsonParser parser = new JsonParser();
+            // JsonArray arreglo de objetos JSON.
+            Object usuarios = parser.parse(contenido);
+            JsonObject objetoo = (JsonObject) usuarios;
+            Object objeto1 = objetoo.get("Usuarios");
+
+            JsonArray arreglo = (JsonArray) objeto1;
+            //JsonArray arreglo = parser.parse(contenido).getAsJsonArray();
+            System.out.println("Cantidad de Objetos: " + arreglo.size());
+
+            // RECORRER MI ARREGLO
+            for (int i = 0; i < arreglo.size(); i++) {
+                // JsonObject -> Tomar el Objeto del Arreglo
+                JsonObject objeto = arreglo.get(i).getAsJsonObject();
+                // GUARDAMOS LOS DATOS EN VARIABLEs
+
+                int Id = objeto.get("ID").getAsInt();
+                String nombre = objeto.get("Usuario").getAsString();
+
+                String contrasena = objeto.get("Password").getAsString();
+                String facultad = objeto.get("Facultad").getAsString();
+                String carrera = objeto.get("Carrera").getAsString();
+                int Tipo = objeto.get("Tipo").getAsInt();
+                // CREAMOS NUESTRO OBJETO PERSONA
+
+                Usuarios nuevo = new Usuarios(Id, nombre, contrasena, facultad, carrera, Tipo);
+
+                // MANDAMOS A LLAMAR NUESTRO METODO QUE AGREGA PERSONAS EN EL ARREGLO
+                Proyecto1.AgregarUsuario(nuevo);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fr) {
+                    fr.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
     }
 }

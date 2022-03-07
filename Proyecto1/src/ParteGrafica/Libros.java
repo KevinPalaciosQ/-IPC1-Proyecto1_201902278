@@ -10,6 +10,8 @@ import java.io.FileReader;
 import javax.swing.*;
 import proyecto1.*;
 import Clases.ObjetoLibros;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 public class Libros extends JPanel implements ActionListener{
     JPanel Libross;
     JButton registrarlibro,cargamasiva;
@@ -117,7 +119,6 @@ public class Libros extends JPanel implements ActionListener{
         
         //Aquí empieza la tabla 
         String[] e = {"Id Libro","Nombre Libro","Autor","Tipo","Copias","Disponible","Ocupados"}; 
-        //Object[][]datos ={{"0","Nombre Libro ","Julio Cortazar","Novela","100","10","20"}}; aca va la tabla
         data = Proyecto1.mi();        
         tabla =new JTable(data,e);
         //tabla =new JTable(datos,e);//copia por si genera error
@@ -125,6 +126,8 @@ public class Libros extends JPanel implements ActionListener{
         diseño.setBounds(250,10,600,600);
         this.setLayout(null);
         this.add(diseño);
+        tabla.setEnabled (false);
+        tabla.getTableHeader().setReorderingAllowed(false);
         //diseño de ventana 
         this.setBackground(ColorJLabel);//Relleno 
         this.setLayout(null); //evita que sea modificado  
@@ -158,8 +161,8 @@ public class Libros extends JPanel implements ActionListener{
         Autor.setText("");
         Copias.setText("");
             // A partir de acá da error 
-           // JsonParser parser = new JsonParser();
-            //JsonArray arreglo = parser.parse(contenido).getAsJsonArray();//arreglo json
+            JsonParser parser = new JsonParser();
+            JsonArray arreglo = parser.parse(contenido).getAsJsonArray();//arreglo json
            // System.out.println("Cantidad de Objetos: " + arreglo.size());//arreglo almacenado
         }
     }
