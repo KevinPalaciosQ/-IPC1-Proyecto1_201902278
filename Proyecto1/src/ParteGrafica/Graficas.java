@@ -5,10 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-/**
- *
- * @author kevin
- */
 public class Graficas extends JPanel implements ActionListener{
     
     JPanel Libross;

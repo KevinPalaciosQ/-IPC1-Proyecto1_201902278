@@ -27,7 +27,7 @@ JButton  Actualizar;
         Panel.setBorder(new EmptyBorder(10,10,10,800));
         setContentPane(Panel);
         Panel.setLayout(null);
-        //this.add(Panel);
+        
         //Pestañas
         JTabbedPane pp = new JTabbedPane(JTabbedPane.TOP);
         pp.setBounds(10,11,1290,650);
@@ -66,11 +66,7 @@ JButton  Actualizar;
         this.setLayout(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        this.setVisible(true);
-        
-    
-
-        
+        this.setVisible(true);        
 }
 
     @Override

@@ -8,14 +8,26 @@ private int Copias;
 private int Ocupado;
 private int Disponible;
 //constructor
-    public ObjetoLibros(int Id, String Título, String Autor, int Tipo, int Copias, int Ocupado,int Disponible) {
-        this.Id = Id;
+    public ObjetoLibros( String Título,int Id, String Autor, int Tipo, int Copias, int Disponible,int Ocupado) {
         this.Título = Título;
+        this.Id = Id;
+        
         this.Autor = Autor;
         this.Tipo = Tipo;
         this.Copias = Copias;
-        this.Ocupado = Ocupado;
         this.Disponible= Disponible;
+        this.Ocupado = Ocupado;
+    }
+        public void Mostrarme(){
+        System.out.println("---------------------------");
+        System.out.println("Hola, Mi Título es: " + Título);
+        System.out.println("Hola, mi Id es: " + Id);
+        System.out.println("Mi Autor: " + Autor);
+        System.out.println("Mi Tipo es: "+Tipo);
+        System.out.println("Mi cantidad de copias es: "+Copias);
+        System.out.println("Mi Tipo estado es: "+Disponible);
+        System.out.println("Mi Tipo estado es: "+Ocupado);
+        System.out.println("---------------------------");
     }
     public int getId() {
         return Id;
@@ -48,16 +60,17 @@ private int Disponible;
     public void setCopias(int Copias) {
         this.Copias = Copias;
     }
-    public int getOcupado() {
-        return Ocupado;
-    }
-    public void setOcupado(int Ocupado) {
-        this.Ocupado = Ocupado;
-    }
     public int getDisponible() {
         return Disponible;
     }
     public void setDisponible(int Disponible) {
         this.Disponible = Disponible;
     }
+    public int getOcupado() {
+        return Ocupado;
+    }
+    public void setOcupado(int Ocupado) {
+        this.Ocupado = Ocupado;
+    }
+    
 }

@@ -1,6 +1,5 @@
 package ParteGrafica;
 //Librerias
-
 import Clases.Usuarios;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -15,8 +14,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import proyecto1.*;
-//Paquetes 
-
 public class Registro extends JFrame implements ActionListener {
 
     static JLabel titulo, labuser, labcontra, img, imagen;
@@ -27,19 +24,17 @@ public class Registro extends JFrame implements ActionListener {
     JButton inicio;
     static String usuarioss;
     static String contraseñass;
-// ATRIBUTOS
+    // Atributos
     String contenido = "";
     File archivo;
     FileReader fr;
     BufferedReader br;
-    static String usu, contra;
-
-    //COLOR
+    //Colores
     Color turquesa = new Color(24, 108, 105);
     Color ColorJLabel = new Color(184, 224, 222);//Este es el Color que va en el JLabel
 
     public Registro() {
-        //ICONO DE LA APLICACION
+        //Icono del menú
         setIconImage(new ImageIcon(getClass().getResource("logotipo.png")).getImage());
         //Etiqueta de boton
         imagen = new JLabel();
@@ -151,7 +146,6 @@ public class Registro extends JFrame implements ActionListener {
         }
     }
 
-
     public void leerArchivos() {
 
         try {
@@ -159,7 +153,6 @@ public class Registro extends JFrame implements ActionListener {
             JFileChooser fc = new JFileChooser();
             int op = fc.showOpenDialog(this);
             if (op == JFileChooser.APPROVE_OPTION) {
-                //System.out.println(fc.getSelectedFile());
                 archivo = fc.getSelectedFile();
             }
 
