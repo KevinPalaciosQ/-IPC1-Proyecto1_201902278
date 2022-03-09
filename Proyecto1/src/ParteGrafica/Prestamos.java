@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import proyecto1.Proyecto1;
 
@@ -120,8 +121,25 @@ public class Prestamos extends JPanel implements ActionListener {
         this.setLayout(null);
         diseño.setBounds(270, 10, 600, 600);
         this.add(diseño);
-        //tabla.setEnabled (false);
-        //tabla.getTableHeader().setReorderingAllowed(false);
+        
+        //Area de texto 
+        JTextArea areatexto = new JTextArea();
+        areatexto.setText("{\n" +
+"	\"Prestamos\":[\n" +
+"		{\n" +
+"			\"IDLibro\": 1,\n" +
+"			\"IDUsuario\": 2,\n" +
+"			\"FechaEntrega\":  \"22/02/2022\"\n" +
+"		},\n" +
+"		{\n" +
+"			\"IDLibro\": 2,\n" +
+"			\"IDUsuario\": 2,\n" +
+"			\"FechaEntrega\":  \"20/06/2022\"\n" +
+"		}\n" +
+"	]\n" +
+"}");
+        areatexto.setBounds(850,50,490,275);
+        this.add(areatexto);
     }
 
     @Override

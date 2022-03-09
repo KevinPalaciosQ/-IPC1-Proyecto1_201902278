@@ -22,6 +22,7 @@ public class Registro extends JFrame implements ActionListener {
     JTextField usuarios;
     JPasswordField contraseñas;
     JButton inicio;
+    JTextArea textarea1;
     static String usuarioss;
     static String contraseñass;
     // Atributos
@@ -97,11 +98,31 @@ public class Registro extends JFrame implements ActionListener {
         boton2.setVisible(true);
         boton2.addActionListener(this);
         this.add(boton2);
-
+        
+        //Area de texto 
+        JTextArea areatexto = new JTextArea();
+        areatexto.setText("{\n" +
+"			\"ID\": 1,\n" +
+"			\"Usuario\": \"user\",\n" +
+"			\"Password\": \"123456\",\n" +
+"			\"Facultad\" : \"Administrador\",\n" +
+"			\"Carrera\": \"Administrador\",\n" +
+"			\"Tipo\":  1\n" +
+"		},\n" +
+"		{\n" +
+"			\"ID\": 2,\n" +
+"			\"Usuario\": \"user1\",\n" +
+"			\"Password\": \"123456\",\n" +
+"			\"Tipo\":  2,\n" +
+"			\"Facultad\" : \"Ingenieria\",\n" +
+"			\"Carrera\": \"Ingenieria en ciencias y sistemas\"\n" +
+"		}");
+        areatexto.setBounds(355,235,490,270);
+        this.add(areatexto);
         //Diseño de la ventana
         this.setTitle("Registro");//Titulo
         this.setLayout(null);//Sin margenes
-        this.setBounds(500, 150, 625, 600);
+        this.setBounds(500, 150, 900, 650);
         this.setResizable(false);//quita cambio tamaño 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//cerrar
         this.setVisible(true);//visibilidad
@@ -121,28 +142,21 @@ public class Registro extends JFrame implements ActionListener {
     public void iniciarsesion() {
         usuarioss = usuarios.getText();
         contraseñass = contraseñas.getText();
-        if (usuarioss.equals("user") || contraseñass.equals("123456")) {
-            if (usuarioss.equals("user")) {
-                if (contraseñass.equals("123456")) {
-                    JOptionPane.showMessageDialog(this, " Bienvenido Admin");
-                    this.usuarios.setText("");
-                    this.contraseñas.setText("");
+        if (Proyecto1.verificarusuario(usuarioss)==true) {
+            if (Proyecto1.verificarcontraseña(usuarioss, contraseñass)) {
+                if (Proyecto1.retornarusuarios(usuarioss).getTipo()==1){
+                    JOptionPane.showMessageDialog(this, "Bienvenido Admin");
                     this.setVisible(false);
-                    Concatenar a = new Concatenar();
+                     Concatenar a = new Concatenar();
+                }else if(Proyecto1.retornarusuarios(usuarioss).getTipo()==2){
+                    JOptionPane.showMessageDialog(this, "Usted no tiene permisos de administrador");
                 }
-                else{
-                    JOptionPane.showMessageDialog(this,"Contraseña incorrecta");
-                }
                 
-                
+            }else{
+                JOptionPane.showMessageDialog(this, "Por favor ingresa la contraseña bien");
             }
-            else{
-                JOptionPane.showMessageDialog(this,"Usuario incorrecto");
-                
-            }
-            
         }else{
-            JOptionPane.showMessageDialog(this,"Usuario y contraseña incorrectos");
+            JOptionPane.showMessageDialog(this, "Usuario no valido :c");
         }
     }
 
@@ -232,6 +246,7 @@ public class Registro extends JFrame implements ActionListener {
 
        
     }
+    
 
 }
 

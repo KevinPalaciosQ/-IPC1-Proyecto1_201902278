@@ -132,6 +132,38 @@ public class Libros extends JPanel implements ActionListener {
         this.add(diseño);
         tabla.setEnabled(false);
         tabla.getTableHeader().setReorderingAllowed(false);
+        //Area de texto 
+        JTextArea areatexto = new JTextArea();
+        areatexto.setText("{\n" +
+"			\"Titulo\": \"Luna de Pluton\",\n" +
+"			\"ID\": 1,\n" +
+"			\"Autor\":  \"Dross\",\n" +
+"			\"Tipo\": 1,\n" +
+"			\"Copias\": 60,\n" +
+"			\"Disponibles\": 50,\n" +
+"			\"Ocupados\": 10\n" +
+"		},\n" +
+"		{\n" +
+"			\"Titulo\": \"Hola\",\n" +
+"			\"ID\": 2,\n" +
+"			\"Autor\":  \"Saludo\",\n" +
+"			\"Tipo\": 1,\n" +
+"			\"Copias\": 70,\n" +
+"			\"Disponibles\": 50,\n" +
+"			\"Ocupados\": 20\n" +
+"		},\n" +
+"		{\n" +
+"			\"Titulo\": \"Matematica Basica\",\n" +
+"			\"ID\": 3,\n" +
+"			\"Autor\":  \"Usac\",\n" +
+"			\"Tipo\": 1,\n" +
+"			\"Copias\": 60,\n" +
+"			\"Disponibles\": 50,\n" +
+"			\"Ocupados\": 10\n" +
+"}");
+        areatexto.setBounds(850,50,490,275);
+        this.add(areatexto);
+        
         //diseño de ventana 
         this.setBackground(ColorJLabel);//Relleno 
         this.setLayout(null); //evita que sea modificado  

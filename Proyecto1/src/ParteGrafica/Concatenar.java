@@ -60,7 +60,7 @@ JButton  Actualizar;
         Actualizar.addActionListener(this);
         this.add(Actualizar); 
         //Diseño de la ventana principal
-        this.setTitle("Administrador | Biblioteca Usac");
+        this.setTitle("Administrador | Biblioteca Digital.");
         this.setBounds(20,20,1320,700);
         this.getContentPane().setBackground(fondo);
         this.setLayout(null);
